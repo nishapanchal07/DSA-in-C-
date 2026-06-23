@@ -4,4 +4,27 @@ Determine whether the largest element in the array is at least twice as much as 
 
   */
 
-  
+  class Solution {
+public:
+    int dominantIndex(vector<int>& nums) {
+        int largest = nums[0];
+        int index = 0;
+
+        // Find largest element and its index
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] > largest) {
+                largest = nums[i];
+                index = i;
+            }
+        }
+
+        // Check if largest is at least twice every other element
+        for (int i = 0; i < nums.size(); i++) {
+            if (i != index && largest < 2 * nums[i]) {
+                return -1;
+            }
+        }
+
+        return index;
+    }
+};
